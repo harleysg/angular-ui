@@ -1,0 +1,66 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": [
+          "tsconfig.app.json",
+          "tsconfig.spec.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        /**
+         * Any TypeScript source code (NOT TEMPLATE) related rules you wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project would go here.
+         */
+        "@angular-eslint/directive-selector": [
+          "error",
+          { "type": "attribute", "prefix": "sg", "style": "camelCase" }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          { "type": "element", "prefix": "sg", "style": "kebab-case" }
+        ],
+        "@typescript-eslint/no-null-assertion": "error",
+        "@typescript-eslint/no-for-in-array": "error",
+        "@typescript-eslint/no-this-alias": "error",
+        "no-irregular-whitespace": "error",
+        "no-redeclare": "error",
+        "no-unused-expressions": "error",
+        "padding-line-between-statements": [
+          "error",
+          {
+            "blankline": "always",
+            "prev": "*",
+            "next": "return"
+          }
+        ],
+        "quote-props": [
+          "off",
+          "as-needed"
+        ],
+        "semi": "error"
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {
+        /**
+         * Any template/HTML related rules you wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project would go here.
+         */
+      }
+    }
+  ]
+}
