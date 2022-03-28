@@ -1,0 +1,40 @@
+<div class="gallery_wrapper" #galleryRef>
+  <!-- title -->
+  <h2 *ngIf="galleryName" class="gallery__title">{{ galleryName }}</h2>
+  <!-- gallery grid -->
+  <div class="gallery">
+    <ng-container *ngIf="gallery && gallery.main && gallery.main.show">
+      <div
+        class="gallery_group"
+        [ngClass]="gallery.main.classLayout"
+        *ngFor="let group of gallery.main.list"
+      >
+        <div
+          *ngFor="let source of group; first as isFirst"
+          [ngClass]="{ 'is-first': isFirst && !gallery.main.resetLayout }"
+        >
+          <container-element [ngSwitch]="source.type">
+            <ng-container *ngSwitchCase="'image'">
+              <app-image [image]="source" tabindex="0"></app-image>
+            </ng-container>
+          </container-element>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="gallery && gallery.last && gallery.last.show">
+      <div style="width: 100%">
+        <hr />
+      </div>
+      <div class="gallery_group" [ngClass]="gallery.last.classLayout">
+        <container-element
+          *ngFor="let source of gallery.last.list"
+          [ngSwitch]="source.type"
+        >
+          <ng-container *ngSwitchCase="'image'">
+            <app-image [image]="source" tabindex="0"></app-image>
+          </ng-container>
+        </container-element>
+      </div>
+    </ng-container>
+  </div>
+</div>
