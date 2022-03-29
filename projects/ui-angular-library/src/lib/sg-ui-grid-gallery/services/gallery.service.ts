@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core'
 import {
-  Picsum,
   GalleryList,
   GroupGallery,
   IGallery
 } from '../interfaces/picsum.interface'
 import { GALLERY_LIMIT_GROUP, CSS_CLASSLIST } from '../constants/index'
-import { GalleryHookService } from './hooks.service'
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,7 @@ export class GalleryService {
   classes = CSS_CLASSLIST
   LIMIT = GALLERY_LIMIT_GROUP
 
-  constructor(private hookService: GalleryHookService) {}
+  constructor() {}
 
   private buildGalleyData({ main, last }: GroupGallery): IGallery {
     const isMainLengthMinorThanLimit =
@@ -65,19 +63,6 @@ export class GalleryService {
       main: primary,
       last: additionalList
     }
-  }
-
-  public getGallery(): Promise<Picsum[]> {
-    return new Promise<Picsum[]>((resolve, reject) => {
-      return this.hookService.getGallery().subscribe({
-        next: (data: Picsum[]) => {
-          resolve(data)
-        },
-        error: (err: any) => {
-          reject(err)
-        }
-      })
-    })
   }
 
   public buildGallery(list: GalleryList[]): IGallery {
