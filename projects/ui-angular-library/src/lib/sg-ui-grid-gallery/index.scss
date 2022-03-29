@@ -35,7 +35,7 @@
   &_group {
     grid-template-columns: 1fr 1fr;
     display: grid;
-    gap: 7px 14px;
+    gap: 8px;
   }
 }
 
@@ -51,29 +51,4 @@
 
 .is-first {
   grid-area: first;
-}
-
-figure {
-  padding: 0;
-  margin: 0;
-  max-width: max-content;
-  position: relative;
-
-  small {
-    position: absolute;
-    bottom: 0;
-    font-size: 1vmax;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-  }
-}
-
-img {
-  width: 100%;
-  max-width: 100%;
-  display: block;
-  aspect-ratio: 3/2;
 }
