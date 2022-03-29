@@ -22,9 +22,6 @@
       </div>
     </ng-container>
     <ng-container *ngIf="gallery && gallery.last && gallery.last.show">
-      <div style="width: 100%">
-        <hr />
-      </div>
       <div class="gallery_group" [ngClass]="gallery.last.classLayout">
         <container-element
           *ngFor="let source of gallery.last.list"
