@@ -2,9 +2,14 @@ import { Injectable } from '@angular/core'
 import {
   GalleryList,
   GroupGallery,
-  IGallery
+  IGallery,
+  Layout
 } from '../interfaces/picsum.interface'
-import { GALLERY_LIMIT_GROUP, CSS_CLASSLIST } from '../constants/index'
+import {
+  GALLERY_LIMIT_GROUP,
+  CSS_CLASSLIST,
+  LAYOUT_DEFAULT
+} from '../constants/index'
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +17,7 @@ import { GALLERY_LIMIT_GROUP, CSS_CLASSLIST } from '../constants/index'
 export class GalleryService {
   classes = CSS_CLASSLIST
   LIMIT = GALLERY_LIMIT_GROUP
+  LAYOUT!: Layout
 
   constructor() {}
 
@@ -69,5 +75,36 @@ export class GalleryService {
     const { main, last } = this.getGroupGallery(list)
 
     return this.buildGalleyData({ main, last })
+  }
+
+  public buildLayout(list: GalleryList[]): Layout {
+    const LENGTH = list.length
+    const layout = {
+      ...LAYOUT_DEFAULT,
+      shouldShow: LENGTH > 0
+    }
+
+    if (LENGTH >= this.LIMIT) {
+      const listModule = Math.floor(LENGTH % this.LIMIT)
+
+      switch (listModule) {
+        case 0:
+          layout.value = 'by-triad'
+          return layout
+        case 1:
+          layout.value = 'by-triad by-triad-1'
+          layout.hasTwoLeftOver = false
+          return layout
+        case 2:
+          layout.value = 'by-triad by-triad-2'
+          layout.hasTwoLeftOver = true
+          return layout
+      }
+    }
+
+    layout.value = 'by-one-column'
+    layout.hasTwoLeftOver = false
+
+    return layout
   }
 }

@@ -44,7 +44,7 @@ export class GalleryHookService {
         countList.reduce((prev, curr, i) => {
           gallery.push({
             name: `Stateroom ${i + 1}`,
-            list: galleryList.slice(i === 0 ? 0 : prev, prev + curr)
+            gallery: galleryList.slice(i === 0 ? 0 : prev, prev + curr)
           })
 
           return prev + curr
@@ -122,7 +122,7 @@ class HelpersServices {
         .fill('')
         .map((_, i) => ({
           name: `Stateroom ${i + 1}`,
-          list: list
+          gallery: list
         }))
     ]
   }
@@ -136,7 +136,7 @@ class HelpersServices {
         .fill('')
         .map((_, i) => ({
           name: `Stateroom ${i + 1}`,
-          list: [...Array(this.getRandomLimit(2, 5))].map((_) => ({
+          gallery: [...Array(this.getRandomLimit(2, 5))].map((_) => ({
             display: {
               url: 'https://via.placeholder.com/840x560',
               title: 'image - aspect ratio 2 / 3'

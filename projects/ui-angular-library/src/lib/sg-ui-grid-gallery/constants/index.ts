@@ -6,6 +6,12 @@ const ASPECT_RATIO = {
   }
 }
 
+export const LAYOUT_DEFAULT = {
+  shouldShow: false,
+  value: 'by-triad',
+  hasTwoLeftOver: false
+}
+
 export const CSS_CLASSLIST = {
   oneColumn: 'has-one-column',
   showTriad: 'by-triad'

@@ -1,37 +1,23 @@
-<div class="gallery_wrapper" #galleryRef>
-  <!-- title -->
-  <h2 *ngIf="galleryName" class="gallery__title">{{ galleryName }}</h2>
-  <!-- gallery grid -->
-  <div class="gallery">
-    <ng-container *ngIf="gallery && gallery.main && gallery.main.show">
-      <div
-        class="gallery_group"
-        [ngClass]="gallery.main.classLayout"
-        *ngFor="let group of gallery.main.list"
-      >
-        <div
-          *ngFor="let source of group; first as isFirst"
-          [ngClass]="{ 'is-first': isFirst && !gallery.main.resetLayout }"
-        >
-          <container-element [ngSwitch]="source.type">
-            <ng-container *ngSwitchCase="'image'">
-              <app-image [image]="source" tabindex="0"></app-image>
-            </ng-container>
-          </container-element>
+<div class="gallery" #galleryRef>
+  <ng-container *ngIf="layout.shouldShow">
+    <!-- title -->
+    <h2 *ngIf="galleryName" class="gallery__title">{{ galleryName }}</h2>
+    <!-- gallery grid -->
+    <div class="gallery__grid">
+      <ng-container *ngIf="galleryData && galleryData.gallery">
+        <!-- gallery group -->
+        <div class="gallery__group by-triad" [ngClass]="layout.value">
+          <ng-container [ngTemplateOutlet]="galleryOutlet"></ng-container>
         </div>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="gallery && gallery.last && gallery.last.show">
-      <div class="gallery_group" [ngClass]="gallery.last.classLayout">
-        <container-element
-          *ngFor="let source of gallery.last.list"
-          [ngSwitch]="source.type"
-        >
-          <ng-container *ngSwitchCase="'image'">
-            <app-image [image]="source" tabindex="0"></app-image>
-          </ng-container>
-        </container-element>
-      </div>
-    </ng-container>
-  </div>
+      </ng-container>
+    </div>
+  </ng-container>
 </div>
+
+<ng-template #galleryOutlet let-gallery>
+  <ng-container *ngFor="let source of galleryData.gallery; index as index">
+    <div [ngClass]="'is-type-' + source.type">
+      <app-image [image]="source" tabindex="0"></app-image>
+    </div>
+  </ng-container>
+</ng-template>

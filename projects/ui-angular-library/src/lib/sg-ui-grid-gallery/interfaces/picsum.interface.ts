@@ -26,7 +26,7 @@ export interface GalleryList {
 
 export interface GalleryByStateroom {
   name: string
-  list: GalleryList[] | []
+  gallery: GalleryList[] | []
 }
 
 interface ILastGalleryLayout extends IGalleryLayout {
@@ -57,4 +57,10 @@ export interface GalleryMap {
 export interface Gallery {
   id: string
   sections: GalleryMap
+}
+
+export interface Layout {
+  shouldShow: boolean
+  value: string
+  hasTwoLeftOver: boolean
 }
